@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<script src="https://threejs.org/build/three.js"></script>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="/three.js"></script>
+		<script>
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			const geometry = new THREE.BoxGeometry(2,2,2);
+			const material = new THREE.MeshBasicMaterial( { color: 0xe42491 } );
+			const material2 = new THREE.MeshBasicMaterial( { color: 0x951703 } );
+			const material3 = new THREE.MeshBasicMaterial( { color: 0x8cff00 } );
+			const material4 = new THREE.MeshBasicMaterial( { color: 0xc0c3c3 } );
+			const material5 = new THREE.MeshBasicMaterial( { color: 0x40dfa0 } );
+
+			const cube = new THREE.Mesh( geometry, material );
+			const cube2 = new THREE.Mesh( geometry, material2 );
+			const cube3 = new THREE.Mesh( geometry, material3 );
+			const cube4 = new THREE.Mesh( geometry, material4 );
+			const cube5 = new THREE.Mesh( geometry, material5 );
+			
+			const geometry2 = new THREE.SphereGeometry(1, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+			const material6 = new THREE.MeshNormalMaterial();
+			const sphere = new THREE.Mesh(geometry2, material6);
+
+			scene.add( cube, cube2, cube3, cube4, cube5, sphere );
+
+			camera.position.z = 5;
+
+			const animate = function () {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+				cube.translateY(-0.01);
+				cube2.translateX(-0.005);
+				cube3.translateZ(-0.005);
+				cube4.translateX(-0.01);
+				cube5.translateY(0.001);
+				sphere.translateX(0.00000001);
+
+				renderer.render( scene, camera );
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
